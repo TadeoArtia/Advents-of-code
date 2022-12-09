@@ -18,26 +18,29 @@ class Point {
 function solver(knots) {
 	visited = [];
 	let row = createRow(knots + 1);
-	for (let move of movements) { // For each movement
+	for (let move of movements) {
+		// For each movement
 		let direction = move[0];
 		let distance = parseInt(move[1]);
-		for (let i = 0; i < distance; i++) { // Move individually
-			for (let j = 0; j < row.length; j++) { // Move each knot
-				if (j == 0) {
-					// moving head
-					moveHead(row[j], direction);
-				} else {
-					// moving row
-					let knot = row[j];
-					let previousKnot = row[j - 1];
-					moveKnot(knot, previousKnot);
-				}
+
+		for (let i = 0; i < distance; i++) {
+			// Move individually
+			// Move head
+			let head = row[0];
+			moveHead(head, direction);
+
+			for (let j = 1; j < row.length; j++) {
+				// Move row
+				let knot = row[j];
+				let previousKnot = row[j - 1];
+				moveKnot(knot, previousKnot);
 			}
-            // check position of last knot
-            let lastKnot = row[row.length - 1];
-            if (!wasVisited(lastKnot)) { 
-                visited.push(new Point(lastKnot.x, lastKnot.y));
-            }
+
+			// check position of last knot
+			let lastKnot = row[row.length - 1];
+			if (!wasVisited(lastKnot)) {
+				visited.push(new Point(lastKnot.x, lastKnot.y));
+			}
 		}
 	}
 	console.log(visited.length);
