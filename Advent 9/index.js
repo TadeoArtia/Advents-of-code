@@ -77,44 +77,25 @@ function moveHead(currentPosition, direction) {
 }
 
 function moveKnot(tailPosition, headPosition) {
-	if (tailPosition.x == headPosition.x || tailPosition.y == headPosition.y) {
-		if (tailPosition.x - headPosition.x < -1) {
-			tailPosition.x++;
+	let xDistance = Math.abs(tailPosition.x - headPosition.x);
+	let yDistance = Math.abs(tailPosition.y - headPosition.y);
+	let distance = xDistance + yDistance;
+	if (distance > 1 && (xDistance == 0 || yDistance == 0)) {
+		//only in one direction
+		if (tailPosition.x != headPosition.x) {
+			tailPosition.x > headPosition.x
+				? tailPosition.x--
+				: tailPosition.x++;
+		} else {
+			tailPosition.y > headPosition.y
+				? tailPosition.y--
+				: tailPosition.y++;
 		}
-		if (tailPosition.x - headPosition.x > 1) {
-			tailPosition.x--;
-		}
-		if (tailPosition.y - headPosition.y < -1) {
-			tailPosition.y++;
-		}
-		if (tailPosition.y - headPosition.y > 1) {
-			tailPosition.y--;
-		}
-	} else {
-		if (tailPosition.x - headPosition.x < -1) {
-			tailPosition.x++;
-			tailPosition.y < headPosition.y
-				? tailPosition.y++
-				: tailPosition.y--;
-		}
-		if (tailPosition.x - headPosition.x > 1) {
-			tailPosition.x--;
-			tailPosition.y < headPosition.y
-				? tailPosition.y++
-				: tailPosition.y--;
-		}
-		if (tailPosition.y - headPosition.y < -1) {
-			tailPosition.y++;
-			tailPosition.x < headPosition.x
-				? tailPosition.x++
-				: tailPosition.x--;
-		}
-		if (tailPosition.y - headPosition.y > 1) {
-			tailPosition.y--;
-			tailPosition.x < headPosition.x
-				? tailPosition.x++
-				: tailPosition.x--;
-		}
+	}
+	if (distance > 2) {
+		// in both directions
+		tailPosition.x > headPosition.x ? tailPosition.x-- : tailPosition.x++;
+		tailPosition.y > headPosition.y ? tailPosition.y-- : tailPosition.y++;
 	}
 }
 
