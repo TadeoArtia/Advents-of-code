@@ -41,9 +41,6 @@ function createGraph() {
 					y >= 0 &&
 					y < matrix[x].length
 				) {
-                    console.log(i, j, x, y)
-                    console.log(matrix.length, matrix[0].length)
-                    console.log(matrix[i][j], matrix[x][y])
 					if (canClimb(matrix[i][j], matrix[x][y])) {
 						graph.addEdge(getIndex(i, j), getIndex(x, y));
 					}
@@ -76,8 +73,6 @@ function dijkstra(root) {
 }
 
 function canClimb(a, b) {
-    console.log(a);
-    console.log(b)
 	if (b === "E") return a === "z" || a === "y";
 	if (a === "S") return b === "a";
 	return (
@@ -103,3 +98,19 @@ let finalPoint = locate("E");
 let initialIndex = getIndex(initialPoint[0], initialPoint[1]);
 let result = dijkstra(initialIndex);
 console.log(result[getIndex(finalPoint[0], finalPoint[1])]);
+
+function part2(){
+	let allMins = []
+	for (let i = 0; i < matrix.length; i++) {
+		for (let j = 0; j < matrix[i].length; j++) {
+			if (matrix[i][j] === "a" || matrix[i][j] == "S"){
+				let initialIndex = getIndex(i, j);
+				let result = dijkstra(initialIndex);
+				allMins.push(result[getIndex(finalPoint[0], finalPoint[1])])
+			}
+		}
+	}
+	console.log(allMins.sort((a,b) => a-b)[0]);
+}
+
+part2();
