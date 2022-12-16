@@ -1,10 +1,10 @@
-const READFROM = "./input.txt";
+const READ_FROM = "./input.txt";
 
 function parseData() {
   const fs = require("fs");
 
   const parsedPairs = fs
-    .readFileSync(READFROM, "utf8")
+    .readFileSync(READ_FROM, "utf8")
     .split("\n\n")
     .map((p) => p.split("\n"))
     .map(([a, b]) => [JSON.parse(a), JSON.parse(b)]);
@@ -69,7 +69,7 @@ part1();
 function part2() {
   const fs = require("fs");
   let parsedPairs = fs
-    .readFileSync(READFROM, "utf8")
+    .readFileSync(READ_FROM, "utf8")
     .split("\n\n")
     .map((elem) => elem.split("\n"))
     .reduce((a, b) => a.concat(b))

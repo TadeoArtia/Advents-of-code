@@ -31,7 +31,7 @@ class Cave {
     }
 
     addGrain(grain) {
-        if (this.grains.some(grain0 => grain.x === grain0.x && grain0.y === grain.y)) return;
+        if (this.grains.some(grainO => grain.x === grainO.x && grain.y === grainO.y)) return;
         this.grains.push(grain);
     }
 
